@@ -1,7 +1,10 @@
 package com.nowcoder.community.service;
 
+import com.nowcoder.community.dao.CommentMapper;
 import com.nowcoder.community.dao.DiscussPostMapper;
+import com.nowcoder.community.entity.Comment;
 import com.nowcoder.community.entity.DiscussPost;
+import com.nowcoder.community.util.CommunityConstant;
 import com.nowcoder.community.util.SensitiveFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +17,14 @@ import java.util.List;
  * @description:
  */
 @Service
-public class DiscussPostService {
+public class DiscussPostService implements CommunityConstant{
 
     @Autowired
     private DiscussPostMapper discussPostMapper;
 
     @Autowired
     SensitiveFilter sensitiveFilter;
+
 
     public List<DiscussPost> findDiscussPosts(int userId, int offset, int limit) {
         return discussPostMapper.selectDiscussPosts(userId, offset, limit);
@@ -45,4 +49,5 @@ public class DiscussPostService {
     public DiscussPost findDiscussPostById(int id){
         return discussPostMapper.selectDiscussPostById(id);
     }
+
 }
